@@ -51,47 +51,30 @@ function bot(data,socket,questionNum) {
 
 /// These are the main statments that make up the conversation.
   if (questionNum == 0) {
-  answer= 'Hello ' + input + ' :-)';// output response
+  answer= 'Hello ' + input ;// output response
   waitTime =2000;
-  question = 'How old are you?';			    	// load next question
+  question = 'Do you want to hear a Knock Knock joke?';			    	// load next question
   }
   else if (questionNum == 1) {
-  answer= 'Really ' + input + ' Years old? So that means you where born in: ' + (2018-parseInt(input));// output response
-  waitTime =2000;
-  question = 'Where do you live?';			    	// load next question
+  if (input.toLowerCase()==='yes'|| input===1){
+  	answer= 'Great!';// output response
+  	waitTime =2000;
+  	question = 'Knock Knock';
+	}
+	else {answer = 'You are sad!';
+		waitTime = 0;
+		question = '';
+	}			    	// load next question
   }
   else if (questionNum == 2) {
-  answer= ' Cool! I have never been to ' + input+'.';
-  waitTime =2000;
-  question = 'Whats your favorite Color?';			    	// load next question
+  question = 'Cows go';			    	// load next question
   }
   else if (questionNum == 3) {
-  answer= 'Ok, ' + input+' it is.';
-  socket.emit('changeBG',input.toLowerCase());
-  waitTime = 2000;
-  question = 'Can you still read the font?';			    	// load next question
+  answer = 'No, silly. Cows go Moooooo';
+  waitTime = 2000; 
+  question = 'HAHHAHA I am funny';			    	// load next question
   }
-  else if (questionNum == 4) {
-    if(input.toLowerCase()==='yes'|| input===1){
-      answer = 'Perfect!';
-      waitTime =2000;
-      question = 'Whats your favorite place?';
-    }
-    else if(input.toLowerCase()==='no'|| input===0){
-        socket.emit('changeFont','white'); /// we really should look up the inverse of what we said befor.
-        answer=''
-        question='How about now?';
-        waitTime =0;
-        questionNum--; // Here we go back in the question number this can end up in a loop
-    }else{
-      answer=' I did not understand you. Can you please answer with simply with yes or no.'
-      question='';
-      questionNum--;
-      waitTime =0;
-    }
-  // load next question
-  }
-  else{
+    else{
     answer= 'I have nothing more to say!';// output response
     waitTime =0;
     question = '';
